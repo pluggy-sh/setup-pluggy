@@ -1,0 +1,37 @@
+name: 'Setup pluggy'
+description: 'Install the pluggy CLI on the runner.'
+author: 'pluggy-sh'
+
+branding:
+  icon: 'box'
+  color: 'green'
+
+inputs:
+  pluggy-version:
+    description: 'Version of pluggy to install. Accepts an exact version like "0.2.3" or "latest".'
+    default: 'latest'
+    required: false
+  cache:
+    description: 'Whether to restore the pluggy data-directory cache.'
+    default: 'true'
+    required: false
+  cache-key-prefix:
+    description: 'Prefix for the data-directory cache key.'
+    default: 'pluggy'
+    required: false
+  github-token:
+    description: 'Token used to query the GitHub releases API.'
+    default: ${{ github.token }}
+    required: false
+
+outputs:
+  pluggy-version:
+    description: 'The exact pluggy version that was installed.'
+  pluggy-path:
+    description: 'Absolute path to the installed pluggy binary directory.'
+  cache-hit:
+    description: 'Whether the data-directory cache was restored.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
